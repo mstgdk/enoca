@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +28,7 @@ public class Customer {
     @Column(nullable = false)
     private int age;
 
-    @OneToMany
-    private List<Order> orders;
+
+    @OneToMany   (mappedBy = "customer", orphanRemoval = true,cascade = CascadeType.REMOVE)
+    private List<Order> orders=new ArrayList<>();
 }

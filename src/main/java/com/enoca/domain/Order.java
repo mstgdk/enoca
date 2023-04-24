@@ -27,6 +27,8 @@ public class Order {
     private Double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name="customer_id")
+   //@JoinColumn(name="customer_id")
     private Customer customer;
+
+
 }
