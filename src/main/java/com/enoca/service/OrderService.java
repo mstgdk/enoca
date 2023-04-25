@@ -100,4 +100,13 @@ public class OrderService {
        return orderMapper.map(givenDateOrders);
 
     }
+
+    public List<Order> findAll(Long id) {//******
+        List<Order> orderList=orderRepository.findAllOrders(id);
+        return orderList;
+    }
+
+    /*public List<Order> findAllOrdersByCustomerId(Long id) {
+        List<Order> orderList = orderRepository.findAllOrdersByCustomerId(id);
+    }*/
 }

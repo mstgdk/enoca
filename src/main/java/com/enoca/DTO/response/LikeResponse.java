@@ -20,5 +20,5 @@ public class LikeResponse {
 
     private int age;
 
-    //private List<Order> orders;
+    private List<Long> orderId;
 }

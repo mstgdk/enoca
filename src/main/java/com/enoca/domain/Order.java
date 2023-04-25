@@ -1,5 +1,6 @@
 package com.enoca.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Order {
     @Column(nullable = false)
     private Double totalPrice;
 
+    @JsonIgnore
     @ManyToOne
    //@JoinColumn(name="customer_id")
     private Customer customer;

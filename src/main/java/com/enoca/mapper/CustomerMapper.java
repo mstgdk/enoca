@@ -15,9 +15,9 @@ public interface CustomerMapper {
 
    // List<CustomerResponse> map(List<Customer>customer);
 
-    @Mapping(target="orders", ignore = true)
+    //@Mapping(target="orders", ignore = true)
     CustomerResponse customerToCustomerResponse(Customer customer);
 
-    @Mapping(target="", source ="orders", ignore = true)
+    //@Mapping(target="", source ="orders", ignore = true)
     List<LikeResponse>map(List<Customer>customers);
 }
