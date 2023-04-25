@@ -1,6 +1,7 @@
 package com.enoca.controller;
 
 import com.enoca.DTO.messages.ResponseMessage;
+import com.enoca.DTO.request.DateRequest;
 import com.enoca.DTO.request.OrderRequest;
 import com.enoca.DTO.response.CustomerResponse;
 import com.enoca.DTO.response.EnocaResponse;
@@ -13,8 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -85,4 +88,11 @@ public class OrderController {
       return ResponseEntity.ok(response);
 
   }
+  //Bir servis olmalı ve parametre olarak verilen tarihten sonra oluşturulmuş siparişleri listelesin
+    @GetMapping("/date")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<OrderResponse>>getOrdersAfterGivenDate(@RequestBody DateRequest dateRequest){
+        List<OrderResponse>orderResponseList= orderService.getOrdersAfterGivenDate(dateRequest);
+        return ResponseEntity.ok(orderResponseList);
+    }
 }

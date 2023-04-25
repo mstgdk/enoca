@@ -3,8 +3,11 @@ package com.enoca.controller;
 import com.enoca.DTO.messages.ResponseMessage;
 import com.enoca.DTO.request.CustomerRequest;
 import com.enoca.DTO.request.CustomerUpdateRequest;
+import com.enoca.DTO.request.LikeRequest;
 import com.enoca.DTO.response.CustomerResponse;
 import com.enoca.DTO.response.EnocaResponse;
+import com.enoca.DTO.response.LikeResponse;
+import com.enoca.domain.Customer;
 import com.enoca.service.CustomerService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -49,12 +53,13 @@ public class CustomerController {
         Page<CustomerResponse> customerResponse = customerService.findAllWithPage(pageable);
         return ResponseEntity.ok(customerResponse);
     }
+
     // güncelleme
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<EnocaResponse>updateCustomer(
+    public ResponseEntity<EnocaResponse> updateCustomer(
             @PathVariable Long id,
-            @Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
+            @Valid @RequestBody CustomerUpdateRequest customerUpdateRequest) {
         customerService.customerUpdate(id, customerUpdateRequest);
 
         EnocaResponse response = new EnocaResponse();
@@ -63,10 +68,11 @@ public class CustomerController {
 
         return ResponseEntity.ok(response);
     }
-   //customer silme işlemi
+
+    //customer silme işlemi
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<EnocaResponse>deleteCustomer(@PathVariable Long id){
+    public ResponseEntity<EnocaResponse> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
 
         EnocaResponse response = new EnocaResponse();
@@ -76,4 +82,16 @@ public class CustomerController {
         return ResponseEntity.ok(response);
 
     }
+
+    /* 2- Bir servis olmalı ve bir kelime yada harf değerini parametre olarak alsın ve isminin
+içerisinde bu değer geçen müşteri ve müşteriye ait sipariş id sini getirsin.   */
+    @GetMapping("/like")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<LikeResponse>> like(@Valid @RequestBody LikeRequest likeRequest) {
+        List<LikeResponse> likeList = customerService.likeName(likeRequest);
+        return ResponseEntity.ok(likeList);
+    }
+
+
+    //3- Bir servis olmalı ve siparişi olmayan müşterileri listesin
 }

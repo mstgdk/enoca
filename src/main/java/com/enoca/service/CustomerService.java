@@ -2,7 +2,9 @@ package com.enoca.service;
 
 import com.enoca.DTO.request.CustomerRequest;
 import com.enoca.DTO.request.CustomerUpdateRequest;
+import com.enoca.DTO.request.LikeRequest;
 import com.enoca.DTO.response.CustomerResponse;
+import com.enoca.DTO.response.LikeResponse;
 import com.enoca.domain.Customer;
 import com.enoca.exception.ResourceNotFoundException;
 import com.enoca.exception.message.ErrorMessage;
@@ -11,6 +13,8 @@ import com.enoca.repository.CustomerRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -58,4 +62,12 @@ public class CustomerService {
 
         customerRepository.deleteById(id);
     }
+
+    public List<LikeResponse> likeName(LikeRequest likeRequest) {
+        List<Customer>likeList = customerRepository.findByLike(likeRequest.getLike());
+
+        List<LikeResponse> likeResponse = customerMapper.map(likeList);
+        return likeResponse;
+    }
+
 }

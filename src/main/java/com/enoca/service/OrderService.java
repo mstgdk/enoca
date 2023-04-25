@@ -1,5 +1,6 @@
 package com.enoca.service;
 
+import com.enoca.DTO.request.DateRequest;
 import com.enoca.DTO.request.OrderRequest;
 import com.enoca.DTO.response.CustomerResponse;
 import com.enoca.DTO.response.OrderResponse;
@@ -14,6 +15,9 @@ import com.enoca.repository.OrderRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -88,5 +92,12 @@ public class OrderService {
                 new ResourceNotFoundException(String.format(ErrorMessage.RESOURCE_NOT_FOUND_EXCEPTION)));
 
         orderRepository.delete(order);
+    }
+
+    public List<OrderResponse> getOrdersAfterGivenDate(DateRequest dateRequest) {
+       List<Order> givenDateOrders= orderRepository.findAllByDate(dateRequest.getGivenDate());
+
+       return orderMapper.map(givenDateOrders);
+
     }
 }
