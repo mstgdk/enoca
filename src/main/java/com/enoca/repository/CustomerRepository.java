@@ -14,4 +14,5 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
     @Query(value = "select * from t_customer where t_customer.name like %:like%", nativeQuery = true)
     List<Customer> findByLike(@Param("like") String like);
 
+
 }

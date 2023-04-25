@@ -13,11 +13,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
-   // List<CustomerResponse> map(List<Customer>customer);
+
 
     //@Mapping(target="orders", ignore = true)
     CustomerResponse customerToCustomerResponse(Customer customer);
 
     //@Mapping(target="", source ="orders", ignore = true)
     List<LikeResponse>map(List<Customer>customers);
+
+    List<CustomerResponse> map2(List<Customer>customer);
 }

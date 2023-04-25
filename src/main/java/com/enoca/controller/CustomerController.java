@@ -94,4 +94,11 @@ içerisinde bu değer geçen müşteri ve müşteriye ait sipariş id sini getir
 
 
     //3- Bir servis olmalı ve siparişi olmayan müşterileri listesin
+    @GetMapping("/noorder")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<CustomerResponse>>getCustomersNotHavingOrder(){
+        List<CustomerResponse> customerResponse = customerService.getCustomersNotHavingOrder();
+
+        return ResponseEntity.ok(customerResponse);
+    }
 }

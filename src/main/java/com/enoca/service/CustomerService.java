@@ -80,10 +80,23 @@ public class CustomerService {
 
                 orderIdList.add(x.getId());
             }
-        w.setOrderId(orderIdList);
+            w.setOrderId(orderIdList);
         }
 
         return likeResponse;
     }
 
+    public List<CustomerResponse> getCustomersNotHavingOrder() {
+        List<Customer> customerList = customerRepository.findAll();
+
+        List<Customer> notHavingOrderCustomerList = new ArrayList<>();
+
+        for (Customer w : customerList) {
+            if (w.getOrders().isEmpty()) {
+                notHavingOrderCustomerList.add(w);
+            }
+        }
+        List<CustomerResponse> customerResponse = customerMapper.map2(notHavingOrderCustomerList);
+        return  customerResponse;
+    }
 }
