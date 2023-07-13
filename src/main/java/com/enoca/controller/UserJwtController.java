@@ -43,7 +43,7 @@ public class UserJwtController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    // !!! Login
+    // !!! SIGNIN
     @PostMapping("/signin")
     public ResponseEntity<SignInResponse> authenticate(@Valid @RequestBody SignInRequest signInRequest){
 

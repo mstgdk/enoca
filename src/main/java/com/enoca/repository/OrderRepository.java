@@ -18,7 +18,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     List<Order> findAllByDate(@Param("givenDate") LocalDateTime givenDate);
 
 
-    //List<Order> findAll(Customer customer);//****
+
     @Query(value = "select * from t_order where t_order.customer_id=:id", nativeQuery = true)
     List<Order> findAllOrders(@Param("id") Long id);
 

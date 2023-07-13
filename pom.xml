@@ -10,11 +10,12 @@
 	</parent>
 	<groupId>com.enoca</groupId>
 	<artifactId>enoca1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>enoca1</name>
 	<description>test project for Enoca</description>
 	<properties>
 		<java.version>18</java.version>
+		<springdoc.openapi.version>1.6.9</springdoc.openapi.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -92,7 +93,14 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- !!!!!!!!!!!!!!!!!!!!!!!!   SWAGGER   !!!!!!!!!!!!!!!!!!!!!! -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.openapi.version}</version>
+		</dependency>
 
+		<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 	</dependencies>
 

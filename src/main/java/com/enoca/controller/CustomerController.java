@@ -29,6 +29,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    //create etme
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EnocaResponse> createCustomer(@Valid @RequestBody CustomerRequest customerRequest) {
@@ -40,7 +41,7 @@ public class CustomerController {
 
         return ResponseEntity.ok(response);
     }
-
+    // listeleme
     @GetMapping("/pages")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Page<CustomerResponse>> getAllWithPage(@RequestParam("page") int page,
